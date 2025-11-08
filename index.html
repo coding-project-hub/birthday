@@ -269,6 +269,17 @@ p.lead {
 
 <script>
 (function() {
+  // ===== PASSWORD PROMPT =====
+  let passwordCorrect = false;
+  while(!passwordCorrect) {
+    const pwd = prompt("Enter Password to Access:");
+    if(pwd === "vidu25") {
+      passwordCorrect = true;
+      break;
+    }
+  }
+
+  // ===== COUNTDOWN & MODAL =====
   const target = new Date(new Date().getFullYear(), 10, 25, 0, 0, 0); // Nov 25, 12:00 AM
   const dE = document.getElementById("days"),
         hE = document.getElementById("hours"),
