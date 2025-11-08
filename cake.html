@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Happy Birthday & Love Letter 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at bottom, #ffb6d5 0%, #ff7ccf 35%, #40004d 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  color:white;
+  overflow:hidden;
+  text-align:center;
+  position: relative;
+}
+h1{
+  font-size:2.5rem;
+  margin-bottom:30px;
+  text-shadow:0 0 20px #ffb6e3;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #ff8cd8;}
+  to{text-shadow:0 0 30px #fff;}
+}
+
+/* Cake */
+.cake{
+  position:relative;
+  width:280px;
+  height:320px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.tier{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(to bottom,#ff9bcd,#ff77b9);
+  border:3px solid #ffd9ea;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+.tier::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:12px;
+  background:rgba(255,255,255,0.4);
+  top:0;
+  border-radius:50%;
+}
+.tier1{width:280px;height:80px;bottom:0;border-radius:0 0 20px 20px;}
+.tier2{width:220px;height:70px;bottom:70px;border-radius:20px;}
+.tier3{width:160px;height:60px;bottom:130px;border-radius:20px;}
+.tier4{width:100px;height:50px;bottom:180px;border-radius:20px;}
+
+/* Candles */
+.candle{
+  position:absolute;
+  width:8px;
+  height:35px;
+  background:linear-gradient(to bottom,#fff,#ddd);
+  border-radius:4px;
+}
+.flame{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  width:10px;
+  height:15px;
+  background:radial-gradient(circle at 50% 30%, #fff6a5, #ff8800 70%, #ff2200 100%);
+  border-radius:50%;
+  animation:flicker 0.2s infinite alternate;
+  filter:blur(0.4px);
+}
+@keyframes flicker{
+  0%{transform:translateX(-50%) scale(1);}
+  100%{transform:translateX(-50%) scale(1.2);}
+}
+.smoke{
+  position:absolute;
+  top:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:6px;
+  background:rgba(255,255,255,0.9);
+  border-radius:50%;
+  animation:smokeUp 1s ease-out forwards;
+}
+@keyframes smokeUp{
+  0%{opacity:1;transform:translateX(-50%) translateY(0) scale(0.6);}
+  100%{opacity:0;transform:translateX(-50%) translateY(-40px) scale(1.5);}
+}
+
+/* Button */
+button{
+  background:linear-gradient(90deg,#ff6ec4,#7873f5);
+  color:white;
+  border:none;
+  padding:14px 30px;
+  border-radius:999px;
+  margin-top:40px;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(255,100,200,0.6);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(255,100,220,0.9);
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:-1;
+}
+.confetti span{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:hsl(var(--hue),80%,70%);
+  border-radius:50%;
+  animation:fall 6s linear infinite;
+  opacity:0.8;
+}
+@keyframes fall{
+  0%{transform:translateY(-10vh) rotate(0deg);opacity:1;}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0.8;}
+}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  font-size:1.5rem;
+  animation:floatUp 6s ease-in infinite;
+  opacity:0.8;
+}
+@keyframes floatUp{
+  0%{transform:translateY(100vh) scale(0.8);opacity:1;}
+  100%{transform:translateY(-10vh) scale(1.3);opacity:0;}
+}
+
+/* Birthday text */
+.birthday-text{
+  font-size:2rem;
+  font-weight:800;
+  background:linear-gradient(90deg,#ff4fd8,#ffc7e6,#ff6ec4,#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 30px rgba(255,255,255,0.6);
+  animation:shine 3s infinite linear;
+}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+
+/* ------------------- Letter Overlay ------------------- */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  /* background: rgba(255,182,193,0.9); */
+opacity: 5;
+  display: none;
+  justify-content: center; align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.8s ease;
+}
+.letter {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  width: 380px; padding:50px 30px 30px 30px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow: 0 20px 50px rgba(255,105,180,0.5);
+  border:2px dashed #ff1493;
+  animation: popIn 0.5s ease;
+}
+.letter h2 {
+  color: #ffffff;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  text-shadow:1px 1px 5px #fff;
+}
+.letter button {
+  padding: 12px 25px;
+  background: #ff69b4;
+  color:#fff;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:16px;
+  margin-top:15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow:0 5px 15px rgba(255,105,180,0.4);
+}
+.letter button:hover{
+  transform:scale(1.1);
+  box-shadow:0 8px 20px rgba(255,105,180,0.6);
+}
+.close-btn{
+  position:absolute;
+  top:10px; right:10px;
+  background:#ff1493; color:white;
+  border:none; border-radius:50%;
+  width:30px; height:30px; font-size:18px; font-weight:bold;
+  cursor:pointer; line-height:30px;
+  display:flex; justify-content:center; align-items:center;
+  transition: transform 0.2s, background 0.2s;
+}
+.close-btn:hover{ transform:scale(1.2); background:#ff69b4;}
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+@keyframes popIn{ from{transform:scale(0.5);opacity:0;} to{transform:scale(1);opacity:1;} }
+#bodyButton{
+  display:none;
+  padding:12px 25px;
+  background:linear-gradient(90deg,#7873f5,#ff6ec4);
+  border:none; border-radius:30px;
+  cursor:pointer; font-size:18px;
+  /* position:absolute; top:20px; */
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow:0 5px 15px rgba(255,105,180,0.4);
+}
+#bodyButton:hover{
+  transform:scale(1.1);
+  box-shadow:0 8px 20px rgba(255,105,180,0.6);
+}
+.bothBtn{
+    display: flex;
+    gap: 50px;
+}
+</style>
+</head>
+<body>
+
+<h1 id="mainText">💞 Click that button to blow out all the candles baby 💞</h1>
+
+<div class="cake" id="cake">
+  <div class="tier tier1"></div>
+  <div class="tier tier2"></div>
+  <div class="tier tier3"></div>
+  <div class="tier tier4"></div>
+</div>
+
+<div class="bothBtn">
+    <button id="blowAll">✨ Blow Out All Candles ✨</button>
+    <button id="bodyButton" onclick="goToLink()">Click here for surprise 💌</button>
+</div>
+
+<div class="confetti" id="confetti"></div>
+<audio id="blowSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6d8b3da3b0.mp3?filename=candle-blow-6134.mp3"></audio>
+
+<!-- Letter overlay -->
+<div class="overlay" id="letterOverlay">
+  <div class="letter">
+    <button class="close-btn" onclick="closeLetter()">×</button>
+    <h2>Here is your surprise, Sweetheart 💖</h2>
+    <button onclick="goToLink()">Click here 💌</button>
+  </div>
+</div>
+<!-- <button id="bodyButton" onclick="goToLink()">Click here for surprise 💌</button> -->
+
+<script>
+/* ----------- Candles Setup ----------- */
+const candlePositions=[
+  {x:25,y:250},{x:55,y:250},{x:85,y:250},{x:115,y:250},{x:145,y:250},{x:175,y:250},{x:205,y:250},{x:235,y:250},
+  {x:50,y:200},{x:90,y:200},{x:130,y:200},{x:170,y:200},{x:210,y:200},
+  {x:80,y:150},{x:130,y:150},{x:180,y:150},
+  {x:110,y:105},{x:160,y:105}
+];
+const cake=document.getElementById('cake');
+for(let i=0;i<18;i++){
+  const c=document.createElement('div');
+  c.classList.add('candle');
+  c.style.left=candlePositions[i].x+'px';
+  c.style.bottom=(320 - candlePositions[i].y)+'px';
+  const f=document.createElement('div');
+  f.classList.add('flame');
+  c.appendChild(f);
+  cake.appendChild(c);
+}
+
+const sound=document.getElementById('blowSound');
+let allOut=false;
+
+document.getElementById('blowAll').addEventListener('click',()=>{
+  if(allOut) return;
+  document.querySelectorAll('.flame').forEach(f=>{
+    const candle=f.parentElement;
+    f.remove();
+    const smoke=document.createElement('div');
+    smoke.classList.add('smoke');
+    candle.appendChild(smoke);
+    setTimeout(()=>smoke.remove(),1000);
+  });
+  sound.currentTime=0;
+  sound.play();
+  allOut=true;
+
+  const h1=document.getElementById('mainText');
+  h1.textContent="💨 You blew out all the candles, my love 💋";
+
+  setTimeout(showFinalMessage,3000);
+});
+
+/* ----------- Final Birthday Message ----------- */
+function showFinalMessage(){
+  const h1=document.getElementById('mainText');
+  h1.innerHTML="💖 Wishing the sweetest birthday to my baby!<br><span class='birthday-text'>You’re my forever light, my endless reason to smile 💫</span>";
+  createBurstConfettiAndHearts();
+  setTimeout(()=>{
+    createInfiniteConfetti();
+    createInfiniteHearts();
+  },2000);
+
+  // Show letter overlay after 5 seconds
+  setTimeout(()=>{ document.getElementById('letterOverlay').style.display='flex'; },5000);
+}
+
+/* Confetti & Hearts */
+function createBurstConfettiAndHearts(){
+  const conf=document.getElementById('confetti');
+  for(let i=0;i<150;i++){
+    const span=document.createElement('span');
+    span.style.setProperty('--hue',Math.random()*360);
+    span.style.left=Math.random()*100+'%';
+    span.style.animationDuration=(3+Math.random()*3)+'s';
+    conf.appendChild(span);
+    setTimeout(()=>span.remove(),6000);
+  }
+  for(let j=0;j<50;j++){
+    const heart=document.createElement('div');
+    heart.classList.add('heart');
+    heart.textContent='💖';
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.fontSize=(1+Math.random()*1.5)+'rem';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  }
+}
+function createInfiniteConfetti(){
+  const conf=document.getElementById('confetti');
+  setInterval(()=>{
+    for(let i=0;i<15;i++){
+      const span=document.createElement('span');
+      span.style.setProperty('--hue',Math.random()*360);
+      span.style.left=Math.random()*100+'%';
+      span.style.animationDelay=Math.random()*2+'s';
+      conf.appendChild(span);
+      setTimeout(()=>span.remove(),6000);
+    }
+  },500);
+}
+function createInfiniteHearts(){
+  setInterval(()=>{
+    const heart=document.createElement('div');
+    heart.classList.add('heart');
+    heart.textContent='💖';
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.animationDuration=4+Math.random()*3+'s';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },400);
+}
+
+/* ---------- Letter Overlay ---------- */
+function closeLetter(){
+  document.getElementById('letterOverlay').style.display='none';
+  document.getElementById('bodyButton').style.display='block';
+}
+function goToLink(){
+  window.location.href="album.html";
+}
+
+/* Optional: Floating hearts for background */
+for(let i=0;i<20;i++){
+  let heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random()*100+'%';
+  heart.style.animationDuration = 4+Math.random()*3+'s';
+  heart.style.width = heart.style.height = 10 + Math.random()*20+'px';
+  document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
