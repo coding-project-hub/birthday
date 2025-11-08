@@ -217,7 +217,7 @@ p.lead {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .card { padding: 30px; width: min(95%, 700px); }
+  .card { padding: 30px; width: min(95%, 700px); position: absolute;top: 10%;}
   h1 { font-size: 38px; }
   .num { font-size: 32px; }
   .unit { padding: 16px 20px; min-width: 70px; }
