@@ -389,11 +389,22 @@ h2{
 @media(max-width:480px){
   .box { width: 90%; height: 180px; }
 }
+
+/* .head-fix{
+  width: 100%;
+  text-align: center;
+ border: 2px solid red;
+ position: fixed;
+ z-index: 999;
+} */
+
 </style>
 </head>
 <body>
 <div class="hearts"></div>
-<h2>💖 Happy Birthday Sweetheart 💖</h2>
+<div class="head-fix" >
+  <h2>💖 Happy Birthday Sweetheart 💖</h2>
+</div>
 
 <div class="memory-frame">
   <div class="hanger-topbar"></div>  
@@ -454,17 +465,17 @@ h2{
 </div>
 <script>
 const imageUrls = [
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0001.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0002.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0003.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0004.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0005.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0006.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0007.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0008.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0009.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0010.jpg?raw=true',
-  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0011.jpg?raw=true'
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20250419_014326.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/Screenshot_20251115_232638%5B1%5Df.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240913_002523_613.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240913_002618_003.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240913_002616_488.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240412_204332_266.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/Screenshot_2023-12-22-01-17-46-74_56a5d7f547b7ec4c705e63bf13c9c197.png?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20251115_224541_951.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240412_204329_035.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240211_122247_260.jpg?raw=true',
+  'https://github.com/coding-project-hub/media/blob/main/IMG_20240211_231545_585.jpg?raw=true'
 ];
 
 const carousel = document.getElementById('carousel');
