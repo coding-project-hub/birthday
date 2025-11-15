@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎇 Magical 3D Circular Album 🎇</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 200vh;
+    width: 100vw;
+    background: radial-gradient(circle at center, #1a1a1a, #000000);
+    font-family: Poppins, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Floating hearts container */
+.hearts {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.hearts span {
+    position: absolute;
+    bottom: -30px;
+    width: 15px;
+    height: 15px;
+    background: #ff3e8b;
+    transform: rotate(45deg);
+    filter: drop-shadow(0 0 10px #ff3e8b);
+    animation: floatUp 5s ease-in-out forwards;
+    opacity: 0.9;
+
+    /* Random Position + Delay + Speed */
+    left: calc(10% + 80% * var(--x));
+    animation-delay: calc(-3s * var(--d));
+    animation-duration: calc(3s + 3s * var(--s));
+}
+
+/* Heart bumps */
+.hearts span::before,
+.hearts span::after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background: #ff1a75;
+    border-radius: 50%;
+}
+
+.hearts span::before {
+    top: -8px;
+    left: 0;
+}
+
+.hearts span::after {
+    left: 8px;
+    top: 0;
+}
+
+/* Main floating motion */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(45deg) scale(0.6);
+        opacity: 1;
+    }
+    40% {
+        transform: translateY(-40vh) translateX(-20px) rotate(180deg) scale(1.1);
+        opacity: 0.9;
+    }
+    70% {
+        transform: translateY(-70vh) translateX(20px) rotate(360deg) scale(0.9);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(540deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(circle at center, #ffe6f2, #ff99cc, #ff4da6, #990066);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+  scroll-behavior: smooth;
+  user-select: none;
+  background-image: url(https://images.unsplash.com/photo-1628498188904-036f5e25e93e?auto=format&q=60&w=600);
+  background-size: auto;
+  background-position: center;
+}
+
+
+
+
+.album-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:90%;
+  height:700px;
+  margin-top:50px;
+}
+
+.album-container{
+  width:100%; 
+  height:100%;
+  perspective:1500px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.carousel{
+  width:100%;
+  height:100%;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor: grab;
+}
+
+.carousel img{
+  opacity: .6;
+  position:absolute;
+  width:190px;
+  height:350px;
+  object-fit:cover;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  transition: transform 0.5s, filter 0.5s, z-index 0.5s;
+  cursor:pointer;
+}
+
+.carousel img.active{
+  opacity: 1;
+  width:260px;
+  height:400px;
+  transform: scale(1.6);
+  filter: brightness(1);
+  z-index:20;
+  box-shadow:0 20px 50px rgba(255,255,255,0.2);
+}
+
+.nav-btn{
+  background:linear-gradient(90deg,#ff6ec4,#7873f5);
+  border:none;
+  color:white;
+  padding:12px 24px;
+  border-radius:50px;
+  cursor:pointer;
+  font-size:1.3rem;
+  box-shadow:0 0 25px rgba(255,100,220,0.7);
+  z-index:100;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.nav-btn:hover{transform:scale(1.1);box-shadow:0 0 35px rgba(255,100,220,1);}
+#prevBtn{position:relative; left:5%; top:35%;}
+#nextBtn{position:relative; right:5%; top:35%;}
+
+@media(max-width:480px){
+  .carousel img{width:120px;height:180px;}
+  .nav-btn{padding:8px 16px;font-size:1rem;}
+  #prevBtn{left:-60px;}
+  #nextBtn{right:-60px;}
+}
+
+.extra-content{
+  /* padding:80px 10% 10px 10%; */
+  color:white;
+  text-align:center;
+  width:100%;
+}
+
+h2{
+  font-size:2.5rem;
+  margin-bottom:50px;
+  margin-top:50px;
+  color: white;
+}
+
+.memory-frame {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  margin-top: 50px;
+ 
+}
+
+.memory-track {
+  display: flex;
+  gap: 70px;
+  animation: slideFlow 15s linear infinite;
+}
+
+.hanger-set {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hanger-line {
+  width: 2px;
+  height: 80px;
+  background: #ff99cc;
+  margin-bottom: -10px;
+}
+
+.snapshot {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(255, 0, 150, 0.5);
+  transform-origin: top center;
+  animation: tiltSwing 4s ease-in-out infinite alternate;
+  cursor: pointer;
+  transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.snapshot:hover {
+  transform: scale(1.2) rotate(0deg);
+  box-shadow: 0 20px 20px rgba(255, 255, 255, 0.8);
+  z-index: 10;
+}
+
+@keyframes tiltSwing {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+@keyframes slideFlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hanger-topbar {
+  width: 100%;
+  border: 2px double #ff99cc;
+}
+
+.video-box{
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+.vid{
+  width: 45%;
+  height: 400px;
+}
+
+.box {
+  width: 100%;
+  height: 400px;
+  perspective: 1200px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.box-inner {
+  width: 80%;
+  height: 350px;
+  position: relative;
+  border-radius: 20px;
+}
+
+.box .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.box.open .cover {
+  transform: rotateX(90deg) translateY(150%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box.reset .cover {
+  transform: rotateX(0deg) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.box video {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  transform: translateZ(-1px);
+  animation: glow 3s infinite alternate;
+}
+
+ .video-container{
+        width:80%;
+        /* max-width:1000px; */
+        border-radius:20px;
+        padding:10px;
+        background:rgba(255,255,255,0.05);
+        box-shadow:0 0 30px rgba(255,0,120,0.6);
+        animation: glow 3s infinite alternate;
+        position:relative;
+        cursor:pointer;
+        margin-bottom: 120px;
+    }
+
+    @keyframes glow{
+        0%{ box-shadow:0 0 20px rgba(255,0,120,0.3); }
+        100%{ box-shadow:0 0 40px rgba(0,180,255,0.8); }
+    }
+
+    video{
+        width:100%;
+        border-radius:15px;
+        display:block;
+    }
+
+    .overlay{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        border-radius:15px;
+        background:url('https://i.imgur.com/gQh0pUC.jpeg') center/cover no-repeat;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        color:white;
+        text-shadow:0 0 10px black;
+        font-size:32px;
+        font-weight:600;
+        animation:pulse 2s infinite;
+        z-index:5;
+    }
+
+    .play-btn{
+        margin-top:15px;
+        font-size:20px;
+        padding:10px 25px;
+        background:rgba(255,255,255,0.2);
+        border-radius:12px;
+        backdrop-filter:blur(4px);
+    }
+
+    @keyframes pulse{
+        0%{ transform:scale(1); opacity:0.8; }
+        100%{ transform:scale(1.03); opacity:1; }
+    }
+
+@media(max-width:480px){
+  .box { width: 90%; height: 180px; }
+}
+</style>
+</head>
+<body>
+<div class="hearts"></div>
+<h2>💖 Happy Birthday Sweetheart 💖</h2>
+
+<div class="memory-frame">
+  <div class="hanger-topbar"></div>  
+  <div class="memory-track">
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0001.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0003.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0005.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0002.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0004.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0006.jpg?raw=true"></div>
+
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0001.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0003.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0005.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0002.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0004.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0006.jpg?raw=true"></div>
+  </div>
+</div>
+
+<section class="extra-content"></section>
+
+<div class="album-wrapper">
+  <button class="nav-btn" id="prevBtn">⬅</button>
+  <div class="album-container">
+    <div class="carousel" id="carousel"></div>
+  </div>
+  <button class="nav-btn" id="nextBtn">➡</button>
+</div>
+
+<h2 class="vid-h2">💌 Open the box Sweetu 💌</h2>
+
+<div class="video-box">
+  <div class="box">
+    <div class="box-inner">
+      <div class="cover" style="background-image:url('https://plus.unsplash.com/premium_photo-1710409625244-e9ed7e98f67b?auto=format&q=80&w=1170');"></div>
+      <video class="vid" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="box-inner">
+      <div class="cover" style="background-image:url('https://plus.unsplash.com/premium_photo-1710409625244-e9ed7e98f67b?auto=format&q=80&w=1170');"></div>
+      <video class="vid" src="https://www.w3schools.com/html/movie.mp4" controls></video>
+    </div>
+  </div>
+</div>
+<div class="video-container" id="clickArea">
+
+    <div class="overlay" id="overlay">
+        <div class="play-btn">▶ Start Video</div>
+    </div>
+
+    <video id="vid" controls
+    src="https://github.com/coding-project-hub/birthday/raw/refs/heads/main/Master%20-%20Master%20The%20Blaster%20Video_Thalapathy%20Vijay_AnirudhRavichander_LokeshK..mp4">
+    </video>
+
+</div>
+<script>
+const imageUrls = [
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0001.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0002.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0003.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0004.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0005.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0006.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0007.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0008.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0009.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0010.jpg?raw=true',
+  'https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0011.jpg?raw=true'
+];
+
+const carousel = document.getElementById('carousel');
+const total = imageUrls.length;
+let currentIndex = 0;
+let startX=0, isDragging=false, lastDelta=0;
+
+imageUrls.forEach(url => {
+  const img = document.createElement('img');
+  img.src = url;
+  carousel.appendChild(img);
+});
+const imgs = carousel.querySelectorAll('img');
+
+function rotateCarousel(){
+  const angleStep = 360 / total;
+  const radius = 350;
+  imgs.forEach((img,i)=>{
+    const theta = i * angleStep - currentIndex * angleStep;
+    img.style.transform = `rotateY(${theta}deg) translateZ(${radius}px)`;
+    img.classList.remove('active');
+  });
+  imgs[currentIndex].classList.add('active');
+}
+rotateCarousel();
+
+let autoRotate = setInterval(()=>{ currentIndex = (currentIndex + 1) % total; rotateCarousel(); },10000);
+function resetAutoRotate(){
+  clearInterval(autoRotate);
+  autoRotate = setInterval(()=>{ currentIndex = (currentIndex + 1) % total; rotateCarousel(); },10000);
+}
+
+document.getElementById('nextBtn').addEventListener('click',()=>{
+  currentIndex = (currentIndex + 1) % total;
+  rotateCarousel();
+  resetAutoRotate();
+});
+document.getElementById('prevBtn').addEventListener('click',()=>{
+  currentIndex = (currentIndex - 1 + total) % total;
+  rotateCarousel();
+  resetAutoRotate();
+});
+
+function startDrag(x){ startX = x; isDragging = true; lastDelta=0; }
+function doDrag(x){
+  if(!isDragging) return;
+  const delta = x - startX;
+  const steps = Math.round(delta / 5);
+  if(steps !== lastDelta){
+    currentIndex = (currentIndex - (steps - lastDelta) + total) % total;
+    rotateCarousel();
+    lastDelta = steps;
+  }
+}
+function endDrag(){ isDragging=false; resetAutoRotate(); }
+
+carousel.addEventListener('mousedown', e => startDrag(e.clientX));
+carousel.addEventListener('mousemove', e => doDrag(e.clientX));
+carousel.addEventListener('mouseup', endDrag);
+carousel.addEventListener('mouseleave', endDrag);
+
+carousel.addEventListener('touchstart', e => startDrag(e.touches[0].clientX));
+carousel.addEventListener('touchmove', e => doDrag(e.touches[0].clientX));
+carousel.addEventListener('touchend', endDrag);
+
+const boxes = document.querySelectorAll('.box');
+boxes.forEach(box => {
+  const cover = box.querySelector('.cover');
+  const video = box.querySelector('video');
+
+  cover.addEventListener('click', () => {
+    boxes.forEach(b => {
+      const v = b.querySelector('video');
+      const c = b.querySelector('.cover');
+      b.classList.remove('open','reset');
+      c.style.display='flex';
+      if(b!==box) v.pause();
+    });
+    video.play();
+    box.classList.add('open');
+    setTimeout(()=>{cover.style.display='none';},1000);
+  });
+
+  video.addEventListener('ended', () => {
+    cover.style.display='flex';
+    box.classList.remove('open');
+    box.classList.add('reset');
+  });
+});
+
+//video
+
+ const video = document.getElementById("vid");
+    const area = document.getElementById("clickArea");
+    const overlay = document.getElementById("overlay");
+
+    let firstClick = true;
+
+    // IMPORTANT FIX — prevent click on controls from triggering play
+    video.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    area.addEventListener("click", () => {
+
+        if(firstClick){
+            overlay.style.display = "none";
+            video.play();
+            firstClick = false;
+            return;
+        }
+
+        if (video.paused) video.play();
+        else video.pause();
+    });
+
+    //background heart 
+  const hearts = document.querySelector('.hearts');
+
+    function createHeart() {
+        const span = document.createElement('span');
+
+        // random left position
+        span.style.left = Math.random() * 100 + 'vw';
+
+        // random animation duration
+        span.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+        // random size (SMALLER as you requested)
+        const size = 0.4 + Math.random() * 0.8;
+        span.style.transform = `scale(${size}) rotate(45deg)`;
+
+        // random effect
+        const type = Math.floor(Math.random() * 3);
+        if (type === 1) {
+            span.style.animation = `floatUpRotate ${5 + Math.random() * 4}s ease-in-out forwards`;
+        }
+
+        if (type === 2) {
+            span.style.width = '12px';
+            span.style.height = '12px';
+        }
+
+        hearts.appendChild(span);
+        setTimeout(() => span.remove(), 7000);
+    }
+
+    // smooth constant heart flow
+    setInterval(createHeart, 230);
+</script>
+
+</body>
+</html>
