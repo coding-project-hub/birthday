@@ -194,6 +194,7 @@ h2{
   margin-bottom:50px;
   margin-top:50px;
   color: white;
+  text-align: center;
 }
 
 .memory-frame {
@@ -258,150 +259,167 @@ h2{
   border: 2px double #ff99cc;
 }
 
-.video-box{
-  width: 100%;
-  height: 400px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: 100px;
+/* Video box */
+.video-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+    margin: 50px auto 120px;
 }
-.vid{
-  width: 45%;
-  height: 400px;
-}
-
 .box {
-  width: 100%;
-  height: 400px;
-  perspective: 1200px;
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    width: 400px;
+    height: 300px;
+    perspective: 1200px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.5s;
+    cursor: pointer;
 }
-
+.box:hover { transform: scale(1.05); }
 .box-inner {
-  width: 80%;
-  height: 350px;
-  position: relative;
-  border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
-
 .box .cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2;
-  background-size: cover;
-  background-position: center;
-  transition: transform 1s ease, opacity 1s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1s ease, opacity 1s ease;
 }
-
 .box.open .cover {
-  transform: rotateX(90deg) translateY(150%);
-  opacity: 0;
-  pointer-events: none;
+    transform: rotateX(90deg) translateY(150%);
+    opacity: 0;
+    pointer-events: none;
 }
-
 .box.reset .cover {
-  transform: rotateX(0deg) translateY(0);
-  opacity: 1;
-  pointer-events: all;
+    transform: rotateX(0deg) translateY(0);
+    opacity: 1;
+    pointer-events: all;
 }
-
 .box video {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  object-fit: cover;
-  transform: translateZ(-1px);
-  animation: glow 3s infinite alternate;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
 }
 
- .video-container{
-        width:80%;
-        /* max-width:1000px; */
-        border-radius:20px;
-        padding:10px;
-        background:rgba(255,255,255,0.05);
-        box-shadow:0 0 30px rgba(255,0,120,0.6);
-        animation: glow 3s infinite alternate;
-        position:relative;
-        cursor:pointer;
-        margin-bottom: 120px;
-    }
-
-    @keyframes glow{
-        0%{ box-shadow:0 0 20px rgba(255,0,120,0.3); }
-        100%{ box-shadow:0 0 40px rgba(0,180,255,0.8); }
-    }
-
-    #vid{
-        width:100%;
-        height: 580px;
-        border-radius:15px;
-        display:block;
-    }
-
-    .overlay{
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        border-radius:15px;
-        background:url('https://i.imgur.com/gQh0pUC.jpeg') center/cover no-repeat;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction:column;
-        color:white;
-        text-shadow:0 0 10px black;
-        font-size:32px;
-        font-weight:600;
-        animation:pulse 2s infinite;
-        z-index:5;
-    }
-
-    .play-btn{
-        margin-top:15px;
-        font-size:20px;
-        padding:10px 25px;
-        background:rgba(255,255,255,0.2);
-        border-radius:12px;
-        backdrop-filter:blur(4px);
-    }
-
-    @keyframes pulse{
-        0%{ transform:scale(1); opacity:0.8; }
-        100%{ transform:scale(1.03); opacity:1; }
-    }
-
-@media(max-width:480px){
-  .box { width: 90%; height: 180px; }
+/* Single video container */
+.video-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 50px auto 150px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255,0,120,0.6);
+}
+.video-container video {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+}
+.overlay {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:url('https://i.imgur.com/gQh0pUC.jpeg') center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
+    text-shadow:0 0 10px black;
+    font-size:32px;
+    font-weight:600;
+    animation:pulse 2s infinite;
+    cursor: pointer;
+}
+.play-btn {
+    margin-top: 15px;
+    font-size: 20px;
+    padding: 10px 25px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+}
+@keyframes pulse {
+    0%{ transform:scale(1); opacity:0.8; }
+    100%{ transform:scale(1.03); opacity:1; }
 }
 
-/* .head-fix{
-  width: 100%;
-  text-align: center;
- border: 2px solid red;
- position: fixed;
- z-index: 999;
-} */
+/* Responsive */
+@media (max-width: 1024px) {
+    .carousel img.active { width: 200px; height: 300px; }
+    .album-container { height: 300px; }
+    .box { width: 300px; height: 220px; }
+}
+@media (max-width: 768px) {
+    .carousel img.active { width: 200px; height: 350px; }
+    .album-container { height: 350px; }
+    .box { width: 270px; height: 250px; }
+     .video-container { width: 95%;height: 350px; }
+}
+@media (max-width: 480px) {
+    h2 { font-size: 1.8rem; }
+    .carousel img { width: 130px; height: 210px; }
+    .carousel img.active { width: 150px; height: 200px; }
+    .nav-btn { padding: 8px 16px; font-size: 1rem; }
+    .video-box { flex-direction: column; gap: 70px; }
+    .box { width: 90%; height: 200px; }
+    .video-container { width: 95%;height: 350px; }
+}
+@media (max-width: 768px) {
+    #prevBtn, #nextBtn {
+        top: auto;
+        bottom: 10px; /* move to bottom for small screens */
+        transform: translateY(0);
+        padding: 8px 14px;
+        font-size: 1rem;
+        
+    }
+    #prevBtn { left: 20%; }
+    #nextBtn { right: 20%; }
+    .memory-track {
+  display: flex;
+  gap: 70px;
+  animation: slideFlow 15s linear infinite;
+}
+}
 
+@media (max-width: 480px) {
+    #prevBtn, #nextBtn {
+        bottom: 5px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    #prevBtn { left: 2%; }
+    #nextBtn { right: 2%; }
+  .memory-track {
+  display: flex;
+  gap: 70px;
+  animation: slideFlow 5s linear infinite;
+}
+}
 </style>
 </head>
-<body>
+<body>-
 <div class="hearts"></div>
 <div class="head-fix" >
   <h2>💖 Happy Birthday Sweetheart 💖</h2>
@@ -410,19 +428,19 @@ h2{
 <div class="memory-frame">
   <div class="hanger-topbar"></div>  
   <div class="memory-track">
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0001.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0003.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0005.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0002.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0004.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0006.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0004.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0010.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0014.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0002.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0016.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0020.jpg?raw=true"></div>
 
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0001.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0003.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0005.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0002.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0004.jpg?raw=true"></div>
-    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/instagram-secure/help/blob/main/IMG-20251108-WA0006.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG_20240211_231545_585.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/1000051559.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0030.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0028.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0023.jpg?raw=true"></div>
+    <div class="hanger-set"><div class="hanger-line"></div><img class="snapshot" src="https://github.com/coding-project-hub/images/blob/main/IMG-20251124-WA0027.jpg?raw=true"></div>
   </div>
 </div>
 
@@ -436,20 +454,20 @@ h2{
   <button class="nav-btn" id="nextBtn">➡</button>
 </div>
 
-<h2 class="vid-h2">💌 Open the box Sweetu 💌</h2>
+<h2 class="vid-h2">Open the box Sweetu 💌</h2>
 
 <div class="video-box">
   <div class="box">
     <div class="box-inner">
       <div class="cover" style="background-image:url('https://plus.unsplash.com/premium_photo-1710409625244-e9ed7e98f67b?auto=format&q=80&w=1170');"></div>
-      <video class="vid" src="https://www.w3schools.com/html/mov_bbb.mp4" controls></video>
+      <video class="vid" src="#" controls></video>
     </div>
   </div>
 
   <div class="box">
     <div class="box-inner">
       <div class="cover" style="background-image:url('https://plus.unsplash.com/premium_photo-1710409625244-e9ed7e98f67b?auto=format&q=80&w=1170');"></div>
-      <video class="vid" src="https://www.w3schools.com/html/movie.mp4" controls></video>
+      <video class="vid" src="#" controls></video>
     </div>
   </div>
 </div>
@@ -460,23 +478,23 @@ h2{
     </div>
 
     <video id="vid" controls
-    src="https://github.com/coding-project-hub/media/raw/refs/heads/main/vid.mp4">
+    src="https://github.com/coding-project-hub/images/raw/refs/heads/main/VN20251124_221217.mp4">
     </video>
 
 </div>
 <script>
 const imageUrls = [
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20250419_014326.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/Screenshot_20251115_232638%5B1%5Df.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20240913_002523_613.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20240913_002618_003.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20240913_002616_488.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20240412_204332_266.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/Screenshot_2023-12-22-01-17-46-74_56a5d7f547b7ec4c705e63bf13c9c197.png?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20251115_224541_951.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/1000051562.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/1000051559.jpg?raw=true',
-  'https://github.com/coding-project-hub/media/blob/main/IMG_20240211_231545_585.jpg?raw=true'
+  'https://github.com/coding-project-hub/images/blob/main/IMG_20250419_014326.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/Screenshot_20251115_232638%5B1%5Df.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/1000051562.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/IMG_20251115_224555_865.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/1000051570.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/IMG_20240412_204332_266.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/IMG_20240913_002616_488.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/1000051571.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/Screenshot_2023-12-22-01-17-46-74_56a5d7f547b7ec4c705e63bf13c9c197.png?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/IMG_20240211_231545_585.jpg?raw=true',
+  'https://github.com/coding-project-hub/images/blob/main/1000051559.jpg?raw=true'
 ];
 
 const carousel = document.getElementById('carousel');
@@ -503,10 +521,10 @@ function rotateCarousel(){
 }
 rotateCarousel();
 
-let autoRotate = setInterval(()=>{ currentIndex = (currentIndex + 1) % total; rotateCarousel(); },10000);
+let autoRotate = setInterval(()=>{ currentIndex = (currentIndex + 1) % total; rotateCarousel(); },15000);
 function resetAutoRotate(){
   clearInterval(autoRotate);
-  autoRotate = setInterval(()=>{ currentIndex = (currentIndex + 1) % total; rotateCarousel(); },10000);
+  autoRotate = setInterval(()=>{ currentIndex = (currentIndex + 1) % total; rotateCarousel(); },15000);
 }
 
 document.getElementById('nextBtn').addEventListener('click',()=>{
