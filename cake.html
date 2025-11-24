@@ -16,13 +16,15 @@ body{
   justify-content:center;
   min-height:100vh;
   color:white;
-  overflow:hidden;
+  overflow:auto;
   text-align:center;
   position: relative;
+  padding: 20px;
+  /* background: url(""); */
 }
 h1{
   font-size:2.5rem;
-  margin-bottom:30px;
+  margin-bottom:30px; 
   text-shadow:0 0 20px #ffb6e3;
   animation: glow 2s infinite alternate;
 }
@@ -167,26 +169,26 @@ button:hover{
 }
 @keyframes shine{0%{background-position:0%}100%{background-position:200%}}
 
-/* ------------------- Letter Overlay ------------------- */
+/* Letter Overlay */
 .overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  /* background: rgba(255,182,193,0.9); */
-opacity: 5;
+  opacity: 5;
   display: none;
   justify-content: center; align-items: center;
   z-index: 1000;
   animation: fadeIn 0.8s ease;
 }
+
 .letter {
   position: relative;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.6);
   width: 380px; padding:50px 30px 30px 30px;
   border-radius:25px;
   text-align:center;
   box-shadow: 0 20px 50px rgba(255,105,180,0.5);
-  border:2px dashed #ff1493;
+  border:2px dashed #ffffff;
   animation: popIn 0.5s ease;
 }
 .letter h2 {
@@ -214,7 +216,7 @@ opacity: 5;
 }
 .close-btn{
   position:absolute;
-  top:10px; right:10px;
+  top:0px; right:10px;
   background:#ff1493; color:white;
   border:none; border-radius:50%;
   width:30px; height:30px; font-size:18px; font-weight:bold;
@@ -225,13 +227,13 @@ opacity: 5;
 .close-btn:hover{ transform:scale(1.2); background:#ff69b4;}
 @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
 @keyframes popIn{ from{transform:scale(0.5);opacity:0;} to{transform:scale(1);opacity:1;} }
+
 #bodyButton{
   display:none;
   padding:12px 25px;
   background:linear-gradient(90deg,#7873f5,#ff6ec4);
   border:none; border-radius:30px;
   cursor:pointer; font-size:18px;
-  /* position:absolute; top:20px; */
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow:0 5px 15px rgba(255,105,180,0.4);
 }
@@ -243,11 +245,56 @@ opacity: 5;
     display: flex;
     gap: 50px;
 }
+/* Mobile devices (up to 480px) */
+/* Responsive Design */
+
+/* Mobile devices (up to 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+  
+  button { padding:10px 20px; font-size:0.9rem; margin-top:20px; }
+  #bodyButton { font-size:14px; padding:10px 20px; }
+  .bothBtn { flex-direction: column; gap: 20px; }
+  .birthday-text { font-size:1.4rem; }
+  .letter { width: 280px; padding:30px 20px 20px 20px; }
+  .letter h2 { font-size:20px; }
+  .letter button { font-size:14px; padding:10px 20px; }
+  .close-btn { width:25px; height:25px; font-size:16px; line-height:25px; }
+}
+
+/* Small tablets (481px to 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  h1 { font-size: 2rem; margin-bottom: 20px; }
+  #bodyButton { font-size:16px; padding:12px 25px; }
+  .bothBtn { flex-direction: row; gap: 30px; }
+  .birthday-text { font-size:1.7rem; }
+  .letter { width: 320px; padding:40px 25px 25px 25px; }
+  .letter h2 { font-size:22px; }
+  .letter button { font-size:15px; padding:12px 25px; }
+  .close-btn { width:28px; height:28px; font-size:17px; line-height:28px; }
+}
+
+/* Large tablets and desktops (769px and above) */
+@media (min-width: 769px) {
+  h1 { font-size:2.5rem; margin-bottom:30px; }
+  button { padding:14px 30px; font-size:1rem; margin-top:40px; }
+  #bodyButton { font-size:18px; padding:12px 25px; }
+  .bothBtn { flex-direction: row; gap: 50px; }
+  .birthday-text { font-size:2rem; }
+  .letter { width:380px; padding:50px 30px 30px 30px; }
+  .letter h2 { font-size:24px; }
+  .letter button { font-size:16px; padding:12px 25px; }
+  .close-btn { width:30px; height:30px; font-size:18px; line-height:30px; }
+}
+
 </style>
 </head>
 <body>
 
-<h1 id="mainText">💞 Click that button to blow out all the candles baby 💞</h1>
+<h1 id="mainText">💞 Click button to blow out the candles baby 💞</h1>
 
 <div class="cake" id="cake">
   <div class="tier tier1"></div>
@@ -262,7 +309,9 @@ opacity: 5;
 </div>
 
 <div class="confetti" id="confetti"></div>
-<audio id="blowSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6d8b3da3b0.mp3?filename=candle-blow-6134.mp3"></audio>
+
+<!-- 🎵 Your Music -->
+<audio id="blowSound" src="https://github.com/coding-project-hub/birthday/raw/refs/heads/main/happy-birthday-322777%20(1).mp3"></audio>
 
 <!-- Letter overlay -->
 <div class="overlay" id="letterOverlay">
@@ -272,10 +321,9 @@ opacity: 5;
     <button onclick="goToLink()">Click here 💌</button>
   </div>
 </div>
-<!-- <button id="bodyButton" onclick="goToLink()">Click here for surprise 💌</button> -->
 
 <script>
-/* ----------- Candles Setup ----------- */
+/* Candles Setup */
 const candlePositions=[
   {x:25,y:250},{x:55,y:250},{x:85,y:250},{x:115,y:250},{x:145,y:250},{x:175,y:250},{x:205,y:250},{x:235,y:250},
   {x:50,y:200},{x:90,y:200},{x:130,y:200},{x:170,y:200},{x:210,y:200},
@@ -299,6 +347,8 @@ let allOut=false;
 
 document.getElementById('blowAll').addEventListener('click',()=>{
   if(allOut) return;
+
+  // Remove flames
   document.querySelectorAll('.flame').forEach(f=>{
     const candle=f.parentElement;
     f.remove();
@@ -307,8 +357,11 @@ document.getElementById('blowAll').addEventListener('click',()=>{
     candle.appendChild(smoke);
     setTimeout(()=>smoke.remove(),1000);
   });
+
+  // 🎵 Play birthday music
   sound.currentTime=0;
   sound.play();
+
   allOut=true;
 
   const h1=document.getElementById('mainText');
@@ -317,7 +370,7 @@ document.getElementById('blowAll').addEventListener('click',()=>{
   setTimeout(showFinalMessage,3000);
 });
 
-/* ----------- Final Birthday Message ----------- */
+/* Final Birthday Message */
 function showFinalMessage(){
   const h1=document.getElementById('mainText');
   h1.innerHTML="💖 Wishing the sweetest birthday to my baby!<br><span class='birthday-text'>You’re my forever light, my endless reason to smile 💫</span>";
@@ -327,7 +380,6 @@ function showFinalMessage(){
     createInfiniteHearts();
   },2000);
 
-  // Show letter overlay after 5 seconds
   setTimeout(()=>{ document.getElementById('letterOverlay').style.display='flex'; },5000);
 }
 
@@ -377,7 +429,7 @@ function createInfiniteHearts(){
   },400);
 }
 
-/* ---------- Letter Overlay ---------- */
+/* Letter Overlay */
 function closeLetter(){
   document.getElementById('letterOverlay').style.display='none';
   document.getElementById('bodyButton').style.display='block';
@@ -386,7 +438,7 @@ function goToLink(){
   window.location.href="album.html";
 }
 
-/* Optional: Floating hearts for background */
+/* Background hearts */
 for(let i=0;i<20;i++){
   let heart = document.createElement('div');
   heart.className = 'heart';
