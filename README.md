@@ -299,10 +299,27 @@ p.lead {
 
       // Redirect if it is Nov 25 at 12:00 AM
       const today = new Date();
-      if (today.getMonth() === 10 && today.getDate() === 25 && today.getHours() === 0 && today.getMinutes() === 0) {
+      // if (today.getMonth() === 10 && today.getDate() === 25 && today.getHours() === 0 && today.getMinutes() === 0) {
+      //   window.location.href = "cake.html";
+      //   return;
+      // }
+      
+
+      btn.addEventListener("click", e => {
+    e.preventDefault();
+    modal.classList.remove("show");
+
+    setInterval(() => {
+    if (diff <= 0) {
+        dE.textContent = hE.textContent = mE.textContent = sE.textContent = "00";
+
+        // Redirect as soon as countdown finishes
         window.location.href = "cake.html";
         return;
-      }
+    }
+}, 3000);
+
+  });
 
       if (!shown) trigger();
       return;
@@ -325,10 +342,10 @@ p.lead {
     modal.classList.add("show");
   }
 
-  btn.addEventListener("click", e => {
-    e.preventDefault();
-    modal.classList.remove("show");
-  });
+  // btn.addEventListener("click", e => {
+  //   e.preventDefault();
+  //   modal.classList.remove("show");
+  // });
 
   update();
   setInterval(update, 1000);
